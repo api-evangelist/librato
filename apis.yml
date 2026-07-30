@@ -1,24 +1,131 @@
 aid: librato
 name: Librato
-description: 'Librato is a company surfaced as a portfolio company of cowboy-ventures and added to the
-  API Evangelist network as a stub for enrichment. Sector: developer-tools. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Librato was a hosted metrics, monitoring and analytics service for operational
+  data — time-series measurements, tagged metrics, dashboards ("spaces"), charts, annotations,
+  alerts and notification services — delivered as a developer-first SaaS with a JSON REST
+  API at metrics-api.librato.com/v1. Backed by Cowboy Ventures among others, the San
+  Francisco company was acquired by SolarWinds in 2015 for a reported $40 million, and its
+  metrics platform was folded into SolarWinds AppOptics — released in November 2017 — which
+  has itself since reached end of life. The librato.com domain and every product subdomain (metrics.,
+  status., www.) now 301-redirect to the SolarWinds AppOptics end-of-life notice, the
+  metrics-api.librato.com API host no longer resolves in DNS, and the github.com/librato
+  organization was archived on 2024-01-02. This profile is retained as a historical record
+  of a well-regarded developer API: the API reference source, the first-party Ruby, Python,
+  Java and Node client libraries and the collection agents remain publicly archived and are
+  catalogued here. The successor product is SolarWinds Observability SaaS.'
 url: https://raw.githubusercontent.com/api-evangelist/librato/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/146042?v=4
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - cowboy-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-status: retired
+x-acquired-by: SolarWinds
+x-successor: https://www.solarwinds.com/solarwinds-observability
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Developer Tools
-apis: []
+- Monitoring
+- Metrics
+- Observability
+- Time Series
+- Alerting
+- Dashboards
+- Analytics
+- Retired
+apis:
+- aid: librato:metrics-api
+  name: Librato Metrics API
+  description: 'RETIRED. JSON REST API for submitting and retrieving time-series measurements
+    and for managing metrics, metric attributes, spaces, charts, dashboards, instruments,
+    annotations, alerts, notification services, snapshots, jobs and API tokens. HTTP Basic
+    authentication with an account email address as the user and an API token as the
+    password, over HTTPS only. Consistent offset/length/orderby/sort pagination with a
+    top-level "query" envelope. The host no longer resolves; the reference is preserved in
+    the archived librato/api-docs repository.'
+  humanURL: https://github.com/librato/api-docs
+  baseURL: https://metrics-api.librato.com/v1
+  x-status: retired
+  x-baseurl-status: DNS NXDOMAIN as of 2026-07-19; historical production host documented
+    in librato/api-docs
+  tags:
+  - Monitoring
+  - Metrics
+  - Time Series
+  - Alerting
+  - Observability
+  properties:
+  - type: APIReference
+    url: https://github.com/librato/api-docs
+  - type: Documentation
+    url: https://github.com/librato/api-docs
+  - type: GettingStarted
+    url: https://github.com/librato/api-docs/blob/master/source/includes/_introduction.md
+  - type: Authentication
+    url: authentication/librato-authentication.yml
+  - type: Conventions
+    url: conventions/librato-conventions.yml
+  - type: ErrorCatalog
+    url: errors/librato-problem-types.yml
+  - type: DataModel
+    url: data-model/librato-data-model.yml
+common:
+- type: Website
+  url: https://www.librato.com
+- type: APIReference
+  url: https://github.com/librato/api-docs
+- type: Documentation
+  url: https://github.com/librato/api-docs
+- type: GettingStarted
+  url: https://github.com/librato/api-docs/blob/master/source/includes/_introduction.md
+- type: GitHubOrganization
+  url: https://github.com/librato
+- type: Authentication
+  url: authentication/librato-authentication.yml
+- type: Conventions
+  url: conventions/librato-conventions.yml
+- type: ErrorCatalog
+  url: errors/librato-problem-types.yml
+- type: DataModel
+  url: data-model/librato-data-model.yml
+- type: Packages
+  url: packages/librato-packages.yml
+- type: SDKs
+  url: packages/librato-packages.yml
+- type: Lifecycle
+  url: lifecycle/librato-lifecycle.yml
+- type: Deprecation
+  url: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+- type: LLMsTxt
+  url: llms/librato-llms.txt
+- type: DomainSecurity
+  url: security/librato-domain-security.yml
+- type: Parent Company
+  url: https://www.solarwinds.com/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
