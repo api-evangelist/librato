@@ -1,0 +1,111 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/librato/api-docs (source/includes/_authentication.md, _pagination.md,
+  _response-errors.md, _measurements.md)
+status: retired
+api: librato:metrics-api
+base_url: https://metrics-api.librato.com/v1
+authentication:
+  style: http-basic
+  detail: Account email address as user, API token as password; HTTPS required on every
+    request.
+  artifact: authentication/librato-authentication.yml
+media_type:
+  request: application/json
+  response: application/json
+  note: A request sent with any other content type is rejected with 415 Incorrect
+    Content-Type.
+idempotency:
+  supported: false
+  note: Librato documented no idempotency-key header or parameter. Repeat creates are
+    instead guarded server-side by a 422 "Entity Already Exists" response when a new entity
+    matches an existing one, with the docs advising a PUT to modify the existing entity
+    instead. No Idempotency pointer is wired for this provider.
+pagination:
+  style: offset-limit
+  applies_to: INDEX (list) operations across all paginated resources, consistently
+  request_params:
+  - name: offset
+    required: false
+    default: 0
+    description: How many results to skip before the first returned result.
+  - name: length
+    required: false
+    default: 100
+    maximum: 100
+    description: How many resources should be returned.
+  - name: orderby
+    required: false
+    description: Order by the specified attribute; the permissible set and the default vary
+      by resource type.
+  - name: sort
+    required: false
+    default: asc
+    enum:
+    - asc
+    - desc
+    description: Sort order for the results.
+  response_envelope: query
+  response_fields:
+  - name: length
+    description: The maximum number of resources returned in the response.
+  - name: offset
+    description: The index into the entire result set at which the response begins.
+  - name: total
+    description: The total number of resources owned by the user.
+  - name: found
+    description: The number of resources matching the query parameters; less than or equal
+      to total.
+  example_response: '{"query": {"found": 200, "length": 10, "offset": 10, "total": 200},
+    "metrics": [...]}'
+error_envelope:
+  format: proprietary-json
+  root_key: errors
+  categories:
+  - id: params
+    description: Errors related to parameters, reported keyed by the attribute the error
+      occurred on.
+  - id: request
+    description: Errors related to the request itself, reported as an array under the key
+      "request".
+  - id: system
+    description: Service errors (for example maintenance periods), reported as an array
+      under the key "system".
+  rfc9457: false
+  example: '{"errors": {"request": ["Please use secured connection through https!", "Please
+    provide credentials for authentication."]}}'
+  artifact: errors/librato-problem-types.yml
+rate_limiting:
+  signaled: true
+  mechanism: response-headers
+  detail: 'Documented as "Every response will include headers that define the current API
+    limits related to the request made, the current usage of the account towards this limit,
+    the total capacity of the limit and when the API limit will be reset." The specific
+    header names were published on the (now retired) librato.com rate-limits documentation
+    page and are not present in the archived api-docs source, so they are not recorded here
+    rather than guessed.'
+  error_status: 429 Rate Limited; 403 is also returned when an account is rate limited.
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: Single major version pinned in the path (/v1). No dated or header-negotiated
+    versioning was documented.
+  artifact: lifecycle/librato-lifecycle.yml
+tagging:
+  supported: true
+  detail: Measurements carry a tags object of name/value pairs. Tag names must match
+    /\A[-.:_\w]{1,64}\z/ and tag values /\A[-.:_?\\\/\w ]{1,255}\z/; both are lowercased.
+    Tags embedded on a measurement override and suppress top-level tags for that
+    measurement, so to merge both all tags must be embedded per measurement.
+naming_restrictions:
+  metric_names: 255 or fewer characters, drawn from A-Za-z0-9.:-_; the metric namespace is
+    case insensitive.
+request_tracing:
+  supported: false
+  note: No request-id/correlation header was documented.
+field_expansion:
+  supported: false
+async_operations:
+  supported: true
+  detail: Long-running operations (for example snapshot creation) return 202 Accepted and a
+    job resource; poll GET /v1/jobs/:id for completion.

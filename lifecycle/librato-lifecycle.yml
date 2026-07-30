@@ -1,0 +1,83 @@
+generated: '2026-07-19'
+method: searched
+source: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+status: retired
+summary: 'Librato is fully retired. The San Francisco metrics and monitoring company was
+  acquired by SolarWinds (reported at $40 million), its platform was folded into SolarWinds
+  AppOptics — released November 2017 to integrate much of the SolarWinds portfolio including
+  Librato and TraceView — and AppOptics has itself since reached end of life. Every
+  librato.com host now 301-redirects to the AppOptics end-of-life notice, the API host no
+  longer resolves, and the GitHub organization is archived.'
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://github.com/librato/api-docs
+  note: Single major version for the life of the API; no dated or header-negotiated
+    versioning was published.
+deprecation:
+  status: end-of-life
+  policy_url: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+  sunset_header: false
+  successor: SolarWinds Observability SaaS
+  successor_url: https://www.solarwinds.com/solarwinds-observability
+  quote: As the platform has reached the end of its lifecycle, AppOptics is no longer
+    accessible or under active development.
+  in_api_deprecations:
+  - entity: Dashboard
+    superseded_by: Space
+    source: https://github.com/librato/api-docs/blob/master/source/includes/_dashboards.md
+  - entity: Instrument
+    superseded_by: Chart
+    source: https://github.com/librato/api-docs/blob/master/source/includes/_instruments.md
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA document remains reachable.
+status_page:
+  url: null
+  historical_host: https://status.librato.com
+  current_status: 301 redirect to the AppOptics end-of-life notice; no live status page
+  note: No StatusPage pointer is wired because no status page is actually served.
+timeline:
+- date: '2009-10-28'
+  event: github.com/librato organization created.
+  source: https://api.github.com/orgs/librato
+- event: SolarWinds acquires Librato, the San Francisco-based metrics and monitoring
+    company, for a reported $40 million.
+  date: '2015'
+  source: https://en.wikipedia.org/wiki/SolarWinds
+- date: '2017-11'
+  event: SolarWinds releases AppOptics, integrating much of its portfolio including Librato
+    and TraceView into a single SaaS package.
+  source: https://en.wikipedia.org/wiki/SolarWinds
+- date: '2023-12-11'
+  event: librato/api-docs repository archived and made read-only.
+  source: https://github.com/librato/api-docs
+- date: '2024-01-02'
+  event: github.com/librato organization archived; all repositories marked no longer
+    maintained.
+  source: https://github.com/librato
+- date: '2026-07-19'
+  event: 'Probed for this enrichment pass: librato.com, www.librato.com, metrics.librato.com
+    and status.librato.com all return 301 to the AppOptics end-of-life notice;
+    metrics-api.librato.com returns NXDOMAIN.'
+  source: enrichment pipeline probe
+host_probes:
+- host: https://librato.com
+  status: 301
+  redirect: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+- host: https://www.librato.com
+  status: 301
+  redirect: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+- host: https://metrics.librato.com
+  status: 301
+  redirect: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+- host: https://www.librato.com/docs/api
+  status: 301
+  redirect: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+- host: https://metrics-api.librato.com/v1/metrics
+  status: 0
+  note: DNS NXDOMAIN — host no longer resolves.
+- host: https://docs.librato.com
+  status: 0
+  note: DNS NXDOMAIN — host no longer resolves.

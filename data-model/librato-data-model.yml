@@ -1,0 +1,233 @@
+generated: '2026-07-19'
+method: derived
+source: https://github.com/librato/api-docs (source/index.md + source/includes/*.md resource
+  sections and documented request paths)
+note: 'Derived from the archived API reference rather than from an OpenAPI definition —
+  Librato never published a machine-readable spec, and the repo therefore has no openapi/
+  artifact. Entities, paths and relationships below are taken verbatim from the documented
+  resource sections and example requests; nothing is inferred beyond what the reference
+  shows.'
+status: retired
+base_url: https://metrics-api.librato.com/v1
+entities:
+- name: Metric
+  path: /v1/metrics
+  item_path: /v1/metrics/:name
+  key: name
+  description: A named time series. Types include gauge and counter. Carries display and
+    aggregation attributes plus a period and description.
+  operations:
+  - Create a Metric
+  - Retrieve a Metric
+  - Update a Metric
+  - Delete a Metric
+  - List All Metrics
+  relationships:
+  - type: has_many
+    target: Measurement
+    via: name
+  - type: has_one
+    target: MetricAttributes
+    via: attributes
+- name: Measurement
+  path: /v1/measurements
+  item_path: /v1/measurements/:metric_name
+  description: An individual tagged data point submitted against a metric name. Submitted in
+    batches with an optional top-level tags object; retrieved by metric name with duration
+    and resolution parameters.
+  operations:
+  - Create a Measurement
+  - Retrieve a Measurement
+  relationships:
+  - type: belongs_to
+    target: Metric
+    via: name
+- name: MetricAttributes
+  description: The attributes object embedded on a metric — summarize_function,
+    display_units_long, display_units_short, display_min, display_stacked, gap_detection,
+    aggregate, created_by_ua and related display/aggregation settings.
+  embedded_in: Metric
+  relationships:
+  - type: belongs_to
+    target: Metric
+    via: attributes
+- name: Space
+  path: /v1/spaces
+  item_path: /v1/spaces/:id
+  key: id
+  description: A dashboard container that holds charts. The current-generation replacement
+    for the legacy Dashboard/Instrument pair.
+  operations:
+  - Create a Space
+  - Retrieve a Space
+  - Update a Space
+  - Delete Space
+  - List all Spaces
+  relationships:
+  - type: has_many
+    target: Chart
+    via: space_id
+- name: Chart
+  path: /v1/spaces/:space_id/charts
+  item_path: /v1/spaces/:space_id/charts/:id
+  key: id
+  description: A visualization within a space, defined over one or more metric streams.
+  operations:
+  - Create a Chart
+  - Retrieve a Chart
+  - Update a Chart
+  - Delete a Chart
+  - List all Charts in Space
+  relationships:
+  - type: belongs_to
+    target: Space
+    via: space_id
+  - type: has_many
+    target: Metric
+    via: streams
+- name: ChartToken
+  path: /v1/charts/:token
+  key: token
+  description: A shareable, tokenized public link to a rendered chart.
+  relationships:
+  - type: belongs_to
+    target: Chart
+    via: token
+- name: Annotation
+  path: /v1/annotations
+  item_path: /v1/annotations/:name
+  key: name
+  description: A named annotation stream (for example app-deploys) carrying timestamped
+    events that overlay charts.
+  operations:
+  - Create an Annotation
+  - Retrieve an Annotation
+  - Retrieve an Annotation Event
+  - Update an Annotation
+  - Delete an Annotation
+  - List all Annotations
+  relationships:
+  - type: has_many
+    target: AnnotationEvent
+    via: name
+- name: AnnotationEvent
+  path: /v1/annotations/:name/:id
+  key: id
+  description: A single timestamped event on an annotation stream, optionally carrying named
+    links.
+  relationships:
+  - type: belongs_to
+    target: Annotation
+    via: name
+  - type: has_many
+    target: AnnotationLink
+    via: links
+- name: AnnotationLink
+  path: /v1/annotations/:name/:id/links/:link
+  key: link
+  description: A named URL attached to an annotation event (for example a github link to the
+    deployed commit).
+  relationships:
+  - type: belongs_to
+    target: AnnotationEvent
+    via: id
+- name: Alert
+  path: /v1/alerts
+  item_path: /v1/alerts/:id
+  key: id
+  description: A named alert with conditions over metric streams, an active/triggered status
+    and attached notification services.
+  operations:
+  - Create an Alert
+  - Retrieve an Alert
+  - Update an Alert
+  - Resolve an Alert
+  - Delete Alert
+  - List all Alerts
+  sub_paths:
+  - /v1/alerts/:id/status
+  - /v1/alerts/:id/clear
+  - /v1/alerts/:id/services
+  - /v1/alerts/:alert_id/services/:id
+  relationships:
+  - type: has_many
+    target: Service
+    via: services
+  - type: has_many
+    target: Metric
+    via: conditions
+- name: Service
+  path: /v1/services
+  item_path: /v1/services/:id
+  key: id
+  description: A notification service (email, webhook, chat integration and similar) that
+    alerts are attached to.
+  operations:
+  - Create a Service
+  - Retrieve a Service
+  - Update a Service
+  - Delete a Service
+  - List all Services
+  relationships:
+  - type: has_many
+    target: Alert
+    via: services
+- name: Snapshot
+  path: /v1/snapshots
+  description: A rendered point-in-time image of a chart, produced asynchronously.
+  operations:
+  - Create a Snapshot
+  - Retrieve a Snapshot
+  relationships:
+  - type: has_one
+    target: Job
+    via: job
+- name: Job
+  path: /v1/jobs/:id
+  key: id
+  description: An asynchronous processing job. Long-running requests return 202 Accepted and
+    a job id that is polled for completion.
+  operations:
+  - Retrieve a Job
+- name: ApiToken
+  path: /v1/api_tokens
+  item_path: /v1/api_tokens/:id
+  key: id
+  description: An API token used as the HTTP Basic password. Tokens are themselves managed
+    through the API and can also be addressed by name.
+  operations:
+  - Create a Token
+  - Retrieve a Token
+  - Update a Token
+  - Delete a Token
+  - List all Tokens
+  relationships:
+  - type: belongs_to
+    target: User
+    via: user
+- name: User
+  description: The account identified by the email address used as the HTTP Basic username;
+    owns every other resource in the model.
+  relationships:
+  - type: has_many
+    target: ApiToken
+    via: user
+legacy_entities:
+- name: Dashboard
+  path: /v1/dashboards
+  item_path: /v1/dashboards/:id
+  description: Legacy dashboard container, superseded by Space.
+  superseded_by: Space
+  relationships:
+  - type: has_many
+    target: Instrument
+    via: instruments
+- name: Instrument
+  path: /v1/instruments
+  item_path: /v1/instruments/:id
+  description: Legacy visualization on a dashboard, superseded by Chart.
+  superseded_by: Chart
+  relationships:
+  - type: belongs_to
+    target: Dashboard
+    via: dashboard

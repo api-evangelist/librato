@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: searched
+host: https://librato.com
+result: none
+note: 'Every /.well-known/ path on librato.com returns 301 to the SolarWinds AppOptics
+  end-of-life notice — the whole domain is a blanket redirect, so no discovery document is
+  actually served. The historical API host metrics-api.librato.com no longer resolves in
+  DNS (NXDOMAIN) and could not be probed. No document returned 200, so no raw files were
+  saved and no WellKnown/SecurityTxt pointer is wired.'
+redirect_target: https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm
+documents:
+- path: /.well-known/security.txt
+  status: 301
+- path: /.well-known/openid-configuration
+  status: 301
+- path: /.well-known/oauth-authorization-server
+  status: 301
+- path: /.well-known/api-catalog
+  status: 301
+- path: /.well-known/ai-plugin.json
+  status: 301
+unreachable_hosts:
+- host: metrics-api.librato.com
+  reason: NXDOMAIN

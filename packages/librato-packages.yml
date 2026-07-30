@@ -1,0 +1,108 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/librato (archived 2024-01-02) + npm, PyPI, RubyGems, Maven Central
+status: archived
+note: 'Librato was acquired by SolarWinds and the service is retired. Every first-party
+  client library below is still published and installable from its public registry, but all
+  of the source repositories in the github.com/librato organization were archived on
+  2024-01-02 and are no longer maintained. They target the retired
+  https://metrics-api.librato.com/v1 host, which no longer resolves in DNS.'
+packages:
+- language: ruby
+  registry: rubygems
+  name: librato-metrics
+  version: 2.1.2
+  description: An easy to use ruby wrapper for Librato's Metrics API
+  url: https://rubygems.org/gems/librato-metrics
+  source: https://github.com/librato/librato-metrics
+  install: gem install librato-metrics
+  official: true
+  archived: true
+- language: ruby
+  registry: rubygems
+  name: librato-rails
+  version: 2.1.0
+  description: Report key app statistics to the Librato Metrics service and easily track
+    your own custom metrics
+  url: https://rubygems.org/gems/librato-rails
+  source: https://github.com/librato/librato-rails
+  install: gem install librato-rails
+  official: true
+  archived: true
+- language: ruby
+  registry: rubygems
+  name: librato-rack
+  version: 2.0.5
+  description: Rack middleware to report key app statistics and custom instrumentation to
+    Librato Metrics
+  url: https://rubygems.org/gems/librato-rack
+  source: https://github.com/librato/librato-rack
+  install: gem install librato-rack
+  official: true
+  archived: true
+- language: python
+  registry: pypi
+  name: librato-metrics
+  version: 3.1.0
+  description: Python API Wrapper for Librato
+  url: https://pypi.org/project/librato-metrics/
+  source: https://github.com/librato/python-librato
+  install: pip install librato-metrics
+  official: true
+  archived: true
+- language: javascript
+  registry: npm
+  name: statsd-librato-backend
+  version: 2.0.16
+  description: A StatsD backend for Librato Metrics
+  url: https://www.npmjs.com/package/statsd-librato-backend
+  source: https://github.com/librato/statsd-librato-backend
+  install: npm install statsd-librato-backend
+  official: true
+  archived: true
+- language: java
+  registry: maven
+  name: com.librato.metrics:librato-java
+  version: 2.1.3
+  description: Java language bindings for the Librato API
+  url: https://central.sonatype.com/artifact/com.librato.metrics/librato-java
+  source: https://github.com/librato/librato-java
+  install: 'maven: com.librato.metrics:librato-java:2.1.3'
+  official: true
+  archived: true
+- language: java
+  registry: maven
+  name: com.librato.metrics:metrics-librato
+  version: 5.1.4
+  description: Librato reporter for the dropwizard/metrics library
+  url: https://central.sonatype.com/artifact/com.librato.metrics/metrics-librato
+  source: https://github.com/librato/metrics-librato
+  install: 'maven: com.librato.metrics:metrics-librato:5.1.4'
+  official: true
+  archived: true
+- language: java
+  registry: maven
+  name: com.librato.metrics:dropwizard-metrics-librato
+  version: 10.2.0.6
+  description: Dropwizard integration that reports metrics to Librato
+  url: https://central.sonatype.com/artifact/com.librato.metrics/dropwizard-metrics-librato
+  official: true
+  archived: true
+third_party:
+- language: javascript
+  registry: npm
+  name: librato-node
+  version_seen: latest
+  description: A node.js client for Librato Metrics
+  url: https://www.npmjs.com/package/librato-node
+  source: https://github.com/goodeggs/librato-node
+  official: false
+  note: Maintained by Good Eggs, not by Librato.
+agents:
+- name: collectd-librato
+  description: Collectd plugin for Librato Metrics
+  source: https://github.com/librato/collectd-librato
+  official: true
+  archived: true
+  registry: none
+  note: Distributed from source; not published to PyPI.

@@ -1,0 +1,82 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/librato/api-docs/blob/master/source/includes/_response-errors.md
+docs: https://github.com/librato/api-docs/blob/master/source/includes/_response-errors.md
+format: proprietary-json
+status: retired
+envelope:
+  root_key: errors
+  shape: 'A JSON object whose single "errors" key maps one of three category keys to its
+    messages: "params" (keyed by the offending attribute), "request" (array) and "system"
+    (array).'
+  example: '{"errors": {"request": ["Please use secured connection through https!", "Please
+    provide credentials for authentication."]}}'
+categories:
+- id: params
+  description: Errors related to parameters, reported based on the attribute the error
+    occurred on.
+- id: request
+  description: Errors related to the request itself, reported in an array under the key
+    "request".
+- id: system
+  description: Service errors, for example maintenance periods, reported in an array under
+    the key "system".
+success_statuses:
+- status: 200
+  title: OK
+  description: The request was processed successfully and the information is returned in
+    the body. Returned after GET, and after PUT when the PUT resulted in data being
+    generated and returned. A search with no results still returns 200.
+- status: 201
+  title: Created
+  description: The request was processed successfully and the resource was created; the
+    Location header points to the resource. Returned after POST only.
+- status: 202
+  title: Accepted
+  description: The request has been accepted for processing but processing is not complete.
+    It might or might not eventually be acted upon.
+- status: 204
+  title: No Content
+  description: The request was processed successfully. Returned after PUT or DELETE only,
+    so there is no response body.
+problems:
+- status: 400
+  title: Bad Request
+  description: The request could not be parsed or the parameters were not valid.
+  remediation: Modify the request before resubmitting.
+- status: 401
+  title: Unauthorized
+  description: Challenges the user to provide authentication credentials.
+  remediation: Send HTTP Basic credentials — account email as user, API token as password.
+- status: 403
+  title: Forbidden
+  description: The request was not encrypted via SSL, or the account is rate limited.
+  remediation: Use HTTPS for every request; if rate limited, back off and retry after the
+    limit resets.
+- status: 404
+  title: Not Found
+  description: The resource does not exist, or the user does not have permission to access
+    it (security through obscurity). A search request that matches nothing returns 200, not
+    404.
+  remediation: Verify the resource id and that the authenticating account owns it.
+- status: 415
+  title: Incorrect Content-Type
+  description: Content type was not application/json.
+  remediation: 'Set the request header Content-Type: application/json.'
+- status: 422
+  title: Entity Already Exists
+  description: An attempt was made to create a new entity that matched an existing one.
+  remediation: Use unique parameters (for example a different container name), or issue a
+    PUT to modify the existing entity.
+- status: 429
+  title: Rate Limited
+  description: The request was rate limited; some data may still have been permitted, so the
+    response body should be checked. When creating a measurement, this is also returned
+    when the basic format of the payload cannot be parsed to identify measurements.
+  remediation: Inspect the rate-limit response headers, back off until reset, and validate
+    the measurement payload format.
+- status: 503
+  title: Service Unavailable
+  description: Returned in the rare case the API is put into maintenance mode for a service
+    upgrade.
+  remediation: Resubmit the request later.

@@ -1,0 +1,54 @@
+# Librato
+
+> RETIRED. Librato was a hosted metrics, monitoring and analytics service for operational data — time-series measurements, tagged metrics, dashboards ("spaces"), charts, annotations, alerts and notification services — with a JSON REST API at https://metrics-api.librato.com/v1. The San Francisco company was acquired by SolarWinds (reported at $40 million) and its platform was folded into SolarWinds AppOptics, which has itself since reached end of life. Every librato.com host now 301-redirects to the AppOptics end-of-life notice, metrics-api.librato.com no longer resolves in DNS, and the github.com/librato organization was archived on 2024-01-02. Nothing here is callable; this is a historical record. The successor product is SolarWinds Observability SaaS.
+
+## Status
+
+- [AppOptics end-of-life notice](https://documentation.solarwinds.com/en/success_center/observability/content/migrate-ao/ao-eol.htm): the live redirect target for every librato.com host. "As the platform has reached the end of its lifecycle, AppOptics is no longer accessible or under active development."
+- [SolarWinds Observability SaaS](https://www.solarwinds.com/solarwinds-observability): the successor product.
+- [Lifecycle artifact](lifecycle/librato-lifecycle.yml): full retirement timeline and host probe results.
+
+## API
+
+- [Librato Metrics API reference (archived source)](https://github.com/librato/api-docs): the Slate source for the former https://www.librato.com/docs/api site. Read-only since 2023-12-11 and the only surviving authoritative reference.
+- Base URL: `https://metrics-api.librato.com/v1` (NXDOMAIN as of 2026-07-19)
+- Resources: measurements, metrics, metric attributes, spaces, charts, chart tokens, annotations, alerts, notification services, api_tokens, snapshots, jobs; legacy dashboards and instruments.
+- No OpenAPI, AsyncAPI, GraphQL or gRPC definition was ever published, so this repo carries no machine-readable spec.
+
+## Conventions
+
+- [Authentication](https://github.com/librato/api-docs/blob/master/source/includes/_authentication.md): HTTP Basic on every request over HTTPS — account email address as user, API token as password. No OAuth, no scopes.
+- [Pagination](https://github.com/librato/api-docs/blob/master/source/includes/_pagination.md): offset/length/orderby/sort, applied consistently to every list operation, with a top-level `query` envelope carrying `length`, `offset`, `total` and `found`.
+- [Response codes and errors](https://github.com/librato/api-docs/blob/master/source/includes/_response-errors.md): proprietary JSON envelope keyed on `errors`, split into `params`, `request` and `system` categories. No RFC 9457.
+- No idempotency-key contract; duplicate creates return 422 Entity Already Exists.
+- Rate limits were signalled through response headers; 429 Rate Limited, and 403 when an account was rate limited.
+- [Quick start](https://github.com/librato/api-docs/blob/master/source/includes/_introduction.md): submit and retrieve measurements with cURL, Ruby and Python examples.
+
+## Repo artifacts
+
+- [apis.yml](apis.yml): the APIs.json profile for this provider.
+- [authentication/librato-authentication.yml](authentication/librato-authentication.yml): auth profile.
+- [conventions/librato-conventions.yml](conventions/librato-conventions.yml): pagination, error envelope, rate-limit signalling, tagging and naming rules.
+- [errors/librato-problem-types.yml](errors/librato-problem-types.yml): the full documented status-code and error-category catalog.
+- [data-model/librato-data-model.yml](data-model/librato-data-model.yml): entity-relationship graph derived from the archived reference.
+- [packages/librato-packages.yml](packages/librato-packages.yml): the first-party Ruby, Python, Java and Node client libraries — all still installable from their registries, all archived upstream.
+- [lifecycle/librato-lifecycle.yml](lifecycle/librato-lifecycle.yml): retirement timeline.
+- [security/librato-domain-security.yml](security/librato-domain-security.yml): probed TLS/HSTS/DNSSEC/CAA/SPF/DMARC posture for the surviving redirect host.
+- [well-known/librato-well-known.yml](well-known/librato-well-known.yml): /.well-known/ probe results (no document served).
+
+## Client libraries
+
+- [librato-metrics (Ruby)](https://rubygems.org/gems/librato-metrics) — `gem install librato-metrics`
+- [librato-rails (Ruby)](https://rubygems.org/gems/librato-rails) — `gem install librato-rails`
+- [librato-rack (Ruby)](https://rubygems.org/gems/librato-rack) — `gem install librato-rack`
+- [librato-metrics (Python)](https://pypi.org/project/librato-metrics/) — `pip install librato-metrics`
+- [statsd-librato-backend (Node)](https://www.npmjs.com/package/statsd-librato-backend) — `npm install statsd-librato-backend`
+- [librato-java (Java)](https://central.sonatype.com/artifact/com.librato.metrics/librato-java)
+- [metrics-librato (Java, dropwizard/metrics reporter)](https://central.sonatype.com/artifact/com.librato.metrics/metrics-librato)
+- [collectd-librato](https://github.com/librato/collectd-librato) — collectd plugin, source only.
+
+## Notes for agents
+
+- Do not attempt to call this API. The host does not resolve and no credentials can be issued.
+- If a user is looking for the live equivalent, direct them to SolarWinds Observability SaaS.
+- Related SolarWinds-acquired monitoring providers in this network: pingdom, papertrail, loggly, solarwinds.
