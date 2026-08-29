@@ -14,6 +14,17 @@ description: 'Librato was a hosted metrics, monitoring and analytics service for
   Java and Node client libraries and the collection agents remain publicly archived and are
   catalogued here. The successor product is SolarWinds Observability SaaS.'
 url: https://raw.githubusercontent.com/api-evangelist/librato/refs/heads/main/apis.yml
+deliveryModel:
+  model: library
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
