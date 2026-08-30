@@ -98,6 +98,11 @@ apis:
   - type: DataModel
     url: data-model/librato-data-model.yml
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/solarwinds/
+  name: SolarWinds
+  x-relationship: acquired
+  x-evidence: "Backed by Cowboy Ventures among others, the San Francisco company was acquired by SolarWinds in 2015 for a reported $40 million, and its metrics platform was folded into SolarWinds AppOptics — released in November 2017 — which has itself si"
 - type: Website
   url: https://www.librato.com
 - type: APIReference
