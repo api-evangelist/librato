@@ -64,6 +64,55 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Librato is a company surfaced as a portfolio company of cowboy-ventures and added to the API Evangelist network as a stub for enrichment. Sector: developer-tools. This profile is a lead awaiting the enrichment pipeline.
+> **No longer operating.** This company or product has shut down, been discontinued, or been deprecated. This profile is kept as a historical record and is not maintained or rated.
 
-Backed by: cowboy-ventures
+**Status:** retired
+
+Librato was a hosted metrics, monitoring and analytics service for operational data — time-series measurements, tagged metrics, dashboards ("spaces"), charts, annotations, alerts and notification services — delivered as a developer-first SaaS with a JSON REST API at metrics-api.librato.com/v1. Backed by Cowboy Ventures among others, the San Francisco company was acquired by SolarWinds in 2015 for a reported $40 million, and its metrics platform was folded into SolarWinds AppOptics — released in November 2017 — which has itself since reached end of life. The librato.com domain and every product subdomain (metrics., status., www.) now 301-redirect to the SolarWinds AppOptics end-of-life notice, the metrics-api.librato.com API host no longer resolves in DNS, and the github.com/librato organization was archived on 2024-01-02. This profile is retained as a historical record of a well-regarded developer API: the API reference source, the first-party Ruby, Python, Java and Node client libraries and the collection agents remain publicly archived and are catalogued here. The successor product is SolarWinds Observability SaaS.
+
+**Areas:** Company · Developer Tools · Monitoring · Metrics · Observability · Time Series · Alerting · Dashboards · Analytics · Retired
+
+## Librato on APIs.io (historical record)
+
+Everything profiled for Librato is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/librato/](https://apis.io/providers/librato/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Librato Metrics API](https://apis.io/apis/librato/metrics-api/) — RETIRED. JSON REST API for submitting and retrieving time-series measurements and for managing metrics, metric attributes, spaces, charts, dashboards,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Librato Authentication](https://apis.io/security/librato/librato-authentication/)
+- [Librato Domain Security](https://apis.io/security/librato/librato-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.librato.com)
+- [Documentation](https://github.com/librato/api-docs)
+- [Getting started](https://github.com/librato/api-docs/blob/master/source/includes/_introduction.md)
+- [API reference](https://github.com/librato/api-docs)
+- [GitHub](https://github.com/librato)
+
+## API Evangelist rating
+
+**Not rated** — this company is recorded as no longer operating, so no score is published. If it is in fact operating, say so on this repository and it will be re-profiled.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Librato: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/librato/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
